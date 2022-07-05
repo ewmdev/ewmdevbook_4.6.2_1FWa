@@ -10,6 +10,8 @@ public section.
 protected section.
 private section.
 
+  constants C_DOC_TYPE type /LIME/REF_DOC_TYPE value 'SCWM_REFUI' ##NO_TEXT.
+
   class-methods Z_PI_ITEM_GET
     importing
       !IS_PI_ITEM_GUID type /LIME/PI_GUID
@@ -25,7 +27,6 @@ CLASS ZCL_IM_ERP_GM IMPLEMENTATION.
   METHOD /scwm/if_ex_erp_goodsmvt~change_matdoc.
 
 * reference to be found in text type ’scwm_refui’
-    CONSTANTS: lc_doc_type TYPE /lime/ref_doc_type VALUE 'SCWM_REFUI'.
     DATA: lt_item_pi TYPE /lime/pi_t_guid,
           ls_item_pi TYPE /lime/pi_guid.
 
@@ -62,7 +63,7 @@ CLASS ZCL_IM_ERP_GM IMPLEMENTATION.
         CONTINUE.
       ENDIF.
       DATA(lv_reason) = ls_item_read-data-reason.
-      DATA(ls_logitem) = VALUE #( ls_item_read-t_logitem[ ref_doc_type = lc_doc_type ] ).
+      DATA(ls_logitem) = VALUE #( ls_item_read-t_logitem[ ref_doc_type = c_doc_type ] ).
       DATA(lv_reference) = ls_logitem-ref_doc_id.
 * move reason and reference into materialdocument
       READ TABLE ct_goodsmvt_item
